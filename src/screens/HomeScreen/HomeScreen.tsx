@@ -59,8 +59,6 @@ const HomeScreen = () => {
 
   const fetchData = async () => {
     const SLIDES_DATA = await rootApi.getSlides();
-    console.log(SLIDES_DATA);
-
     setSlides(SLIDES_DATA);
 
     const DATA_SECTIONS = await sections.map(async section => {
@@ -68,7 +66,6 @@ const HomeScreen = () => {
     });
 
     await Promise.all(DATA_SECTIONS).then(value => {
-      console.log(value);
       const tmp = value.map((data, index) => {
         return {
           ...sections[index],
@@ -82,10 +79,6 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log(dataSections);
-  }, [dataSections]);
 
   return (
     <ScrollView
