@@ -28,9 +28,21 @@ const getSection = async (category: string, slug?: string) => {
   }
 };
 
+const getInfoMoive = async (slug: string) => {
+  try {
+    const request = await callApi('GET', `${baseUrl}/anime/${slug}`);
+    if (request.data.success) {
+      return request.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const rootApi = {
   getSlides,
   getSection,
+  getInfoMoive,
 };
 
 export default rootApi;

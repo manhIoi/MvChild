@@ -12,6 +12,7 @@ import Footer from '../../components/Footer';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
 import MovieItem from '../../components/MovieItem';
 import MyHeader from '../../components/MyHeader';
+import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
 import {headerDimensions} from '../../constants/dimensions';
 import {Feather} from '../../constants/icon';
@@ -58,6 +59,8 @@ const HomeScreen = () => {
 
   const fetchData = async () => {
     const SLIDES_DATA = await rootApi.getSlides();
+    console.log(SLIDES_DATA);
+
     setSlides(SLIDES_DATA);
 
     const DATA_SECTIONS = await sections.map(async section => {
@@ -85,7 +88,11 @@ const HomeScreen = () => {
   }, [dataSections]);
 
   return (
-    <View style={styles.screen}>
+    <ScrollView
+      style={styles.screen}
+      onScroll={e => {
+        scrollY.setValue(Math.abs(e.nativeEvent.contentOffset.y));
+      }}>
       {/* header */}
       <Animated.View
         style={[
@@ -102,11 +109,7 @@ const HomeScreen = () => {
         />
       </Animated.View>
 
-      <ScrollView
-        style={styles.container}
-        onScroll={e => {
-          scrollY.setValue(Math.abs(e.nativeEvent.contentOffset.y));
-        }}>
+      <View style={styles.container}>
         {/* slide */}
         <Slides slides={slides} />
 
@@ -120,10 +123,8 @@ const HomeScreen = () => {
             />
           ))}
         </View>
-
-        <Footer />
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -145,13 +146,7 @@ const LeftHeader = () => {
 };
 
 const RightHeader = () => {
-  return (
-    <TouchableOpacity
-      style={{padding: 10}}
-      onPress={() => console.log('navigate search screen')}>
-      <Feather name="search" color="#fff" size={22} />
-    </TouchableOpacity>
-  );
+  return <SearchBtn />;
 };
 
 export default HomeScreen;

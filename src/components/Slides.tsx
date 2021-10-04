@@ -12,13 +12,15 @@ interface SlidesPropsType {
   slides: SlideType[];
 }
 
+let lengthSlide = 0;
+
 const Slides = ({slides}: SlidesPropsType) => {
   const activeIndexAnimated = useRef(new Animated.Value(0)).current;
   let activeIndex = useRef(0).current;
   const inputRange = [-activeIndex - 1, -activeIndex, -activeIndex + 1];
   const [activeMovie, setActiveMovie] = useState(slides[activeIndex]);
   const moveSlide = () => {
-    if (activeIndex === slides.length - 1) {
+    if (activeIndex === lengthSlide - 1) {
       activeIndex = 0;
     } else {
       activeIndex += 1;
@@ -41,6 +43,10 @@ const Slides = ({slides}: SlidesPropsType) => {
       clearInterval(timer);
     };
   }, []);
+
+  useEffect(() => {
+    lengthSlide = slides.length;
+  }, [slides]);
 
   return (
     <View style={styles.container}>

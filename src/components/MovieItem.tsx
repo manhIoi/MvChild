@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/core';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
@@ -11,8 +13,15 @@ interface MovieItemPropsType {
 }
 
 const MovieItem = ({movie}: MovieItemPropsType) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const moveToDetailScreen = () => {
+    navigation.navigate('MovieDetailScreen', {movie});
+  };
   return (
-    <TouchableScale style={styles.container} activeScale={0.95}>
+    <TouchableScale
+      style={styles.container}
+      activeScale={0.95}
+      onPress={moveToDetailScreen}>
       <Image
         style={styles.imgMovie}
         source={{

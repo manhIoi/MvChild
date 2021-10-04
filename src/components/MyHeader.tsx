@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: statusBarHeight,
     height: headerDimensions.fullHeight,
-    backgroundColor: rootColor.redPink,
+    backgroundColor: rootColor.primary,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
