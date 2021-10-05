@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import rootColor from '../constants/colors';
-import {rootFont} from '../constants/fonts';
+import rootFont from '../constants/fonts';
 import {EpisodeType} from '../types';
+import ViewsText from './ViewsText';
 
 interface EpisodePropsType {
   episode: EpisodeType;
@@ -14,7 +15,7 @@ const EpisodeItem = ({episode}: EpisodePropsType) => {
       <Image style={styles.image} source={{uri: episode.thumbnail_medium}} />
       <View style={styles.nameContainer}>
         <Text style={styles.name}> {episode.full_name}</Text>
-        <Text style={styles.views}>Lượt xem: {episode.views}</Text>
+        <ViewsText views={episode.views} />
       </View>
     </View>
   );
@@ -45,5 +46,6 @@ const styles = StyleSheet.create({
   views: {
     color: 'gray',
     fontFamily: rootFont.regular,
+    marginLeft: 3,
   },
 });

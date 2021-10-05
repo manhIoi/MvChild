@@ -1,11 +1,11 @@
 import {useNavigation} from '@react-navigation/core';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
-import rootColor from '../constants/colors';
+import rootColor, {alphaColor} from '../constants/colors';
 import dimensions from '../constants/dimensions';
-import {rootFont} from '../constants/fonts';
+import rootFont from '../constants/fonts';
 import {AnimeType} from '../types';
 
 interface MovieItemPropsType {
@@ -13,9 +13,12 @@ interface MovieItemPropsType {
 }
 
 const MovieItem = ({movie}: MovieItemPropsType) => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const navigation = useNavigation<StackNavigationProp<any>>();
   const moveToDetailScreen = () => {
-    navigation.navigate('MovieDetailScreen', {movie});
+    navigation.navigate('MovieDetailStack', {
+      screen: 'MovieDetailScreen',
+      params: {movie},
+    });
   };
   return (
     <TouchableScale
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
     bottom: 6,
     left: 6,
     right: 6,
-    backgroundColor: 'rgba(255,99,71,0.8)',
+    backgroundColor: alphaColor(rootColor.primary, 0.8),
   },
   movieName: {
     fontFamily: rootFont.medium,

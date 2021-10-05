@@ -5,7 +5,7 @@ import HomeStack from './HomeStack';
 import MyListScreen from '../screens/MyListScreen/MyListScreen';
 import TopScreen from '../screens/TopScreen/TopScreen';
 import AccountStack from './AccountStack';
-import {Feather} from '../constants/icon';
+import {Feather, Entypo, FontAwesome} from '../constants/icon';
 import rootColor, {alphaColor} from '../constants/colors';
 import {bottomTabHeight} from '../constants/dimensions';
 
@@ -16,27 +16,29 @@ const tabs = [
     name: 'HomeStack',
     component: HomeStack,
     label: 'Trang chủ',
-    icon: (color: string) => <Feather name="home" color={color} size={20} />,
+    icon: (color: string) => <Entypo name="home" color={color} size={20} />,
   },
   {
     name: 'MyListScreen',
     component: MyListScreen,
     label: 'Yêu thích',
-    icon: (color: string) => <Feather name="heart" color={color} size={20} />,
+    icon: (color: string) => <Entypo name="heart" color={color} size={20} />,
   },
   {
     name: 'TopScreen',
     component: TopScreen,
     label: 'Bảng xếp hạng',
     icon: (color: string) => (
-      <Feather name="bar-chart" color={color} size={20} />
+      <Entypo name="bar-graph" color={color} size={18} />
     ),
   },
   {
     name: 'AccountStack',
     component: AccountStack,
     label: 'Tài khoản',
-    icon: (color: string) => <Feather name="user" color={color} size={20} />,
+    icon: (color: string) => (
+      <FontAwesome name="user" color={color} size={20} />
+    ),
   },
 ];
 
@@ -45,14 +47,14 @@ const BottomTab = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: rootColor.white,
+        tabBarActiveTintColor: rootColor.primary,
         tabBarInactiveTintColor: 'rgba(255,255,255,0.4)',
+        tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: rootColor.primary,
-          borderTopColor: rootColor.primary,
+          backgroundColor: rootColor.black,
+          borderTopColor: rootColor.black,
           height: bottomTabHeight,
           justifyContent: 'center',
-          paddingBottom: 10,
         },
       }}>
       {tabs.map((tab, index) => {

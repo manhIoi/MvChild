@@ -29,14 +29,19 @@ const sections = [
     category: 'recommended',
   },
   {
-    title: 'Tìm kiếm nhiều nhất trong tháng',
-    category: 'ranking',
-    slug: 'thang',
-  },
-  {
     title: 'Phổ biến nhất',
     category: 'ranking',
     slug: 'nam',
+  },
+  {
+    title: 'Phim hay trong ngày',
+    category: 'ranking',
+    slug: 'ngay',
+  },
+  {
+    title: 'Tìm kiếm nhiều nhất trong tháng',
+    category: 'ranking',
+    slug: 'thang',
   },
 ];
 
@@ -81,12 +86,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ScrollView
-      style={styles.screen}
-      onScroll={e => {
-        scrollY.setValue(Math.abs(e.nativeEvent.contentOffset.y));
-      }}>
-      {/* header */}
+    <>
       <Animated.View
         style={[
           styles.headerContainer,
@@ -101,23 +101,30 @@ const HomeScreen = () => {
           containerColor="transparent"
         />
       </Animated.View>
+      <ScrollView
+        style={styles.screen}
+        onScroll={e => {
+          scrollY.setValue(Math.abs(e.nativeEvent.contentOffset.y));
+        }}>
+        {/* header */}
 
-      <View style={styles.container}>
-        {/* slide */}
-        <Slides slides={slides} />
+        <View style={styles.container}>
+          {/* slide */}
+          <Slides slides={slides} />
 
-        {/* list container list horizontal */}
-        <View style={{paddingHorizontal: 10}}>
-          {dataSections.map((section, index) => (
-            <ListMovieHorizotal
-              key={`dataSection-key-${section.title}-${index}`}
-              title={section.title}
-              movies={section.data}
-            />
-          ))}
+          {/* list container list horizontal */}
+          <View style={{paddingHorizontal: 10}}>
+            {dataSections.map((section, index) => (
+              <ListMovieHorizotal
+                key={`dataSection-key-${section.title}-${index}`}
+                title={section.title}
+                movies={section.data}
+              />
+            ))}
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
 

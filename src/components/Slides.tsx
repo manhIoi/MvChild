@@ -3,7 +3,7 @@ import {Animated, StyleSheet, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import rootColor from '../constants/colors';
 import dimensions from '../constants/dimensions';
-import {rootFont} from '../constants/fonts';
+import rootFont from '../constants/fonts';
 import {SlideType} from '../types';
 import PrimaryButton from './PrimaryButton';
 import Slide from './Slide';
@@ -76,6 +76,7 @@ const Slides = ({slides}: SlidesPropsType) => {
       <View style={styles.detailSlide}>
         <PrimaryButton
           style={styles.detailBtn}
+          styleTitle={styles.detailBtnTitle}
           title="Xem ngay"
           callback={() => console.log(activeMovie)}
         />
@@ -128,6 +129,12 @@ const styles = StyleSheet.create({
   },
   detailBtn: {
     marginBottom: 20,
+    backgroundColor: rootColor.primary,
+  },
+  detailBtnTitle: {
+    color: rootColor.white,
+    fontFamily: rootFont.bold,
+    fontSize: 18,
   },
   textSlideContainer: {
     height: 80,

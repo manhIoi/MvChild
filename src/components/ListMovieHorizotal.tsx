@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import rootColor from '../constants/colors';
-import {rootFont} from '../constants/fonts';
+import rootFont from '../constants/fonts';
 import {AnimeType} from '../types';
 import MovieItem from './MovieItem';
 

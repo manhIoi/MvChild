@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import rootColor from '../constants/colors';
 import {headerDimensions, statusBarHeight} from '../constants/dimensions';
-import {rootFont} from '../constants/fonts';
+import rootFont from '../constants/fonts';
 
 interface MyHeaderPropsType {
   title?: string;

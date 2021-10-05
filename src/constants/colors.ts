@@ -6,13 +6,12 @@ const rootColor = {
   yellow: 'rgb(240,180,115)',
   white: '#fff',
   black: '#111',
-  primary: 'rgb(64,64,64)',
+  // primary: 'rgb(64,64,64)',
+  primary: 'rgb(237,40,76)',
 };
 
 const alphaColor = (rgbColor: string, alpha: number) => {
   const result = `rgba${rgbColor.slice(3, rgbColor.length - 1)},${alpha})`;
-  console.log(typeof result, result);
-
   return result;
 };
 

@@ -1,43 +1,52 @@
 import {StyleSheet} from 'react-native';
 import rootColor from '../../constants/colors';
-import {headerDimensions} from '../../constants/dimensions';
-import {rootFont} from '../../constants/fonts';
+import dimensions, {headerDimensions} from '../../constants/dimensions';
+import rootFont from '../../constants/fonts';
 
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: rootColor.black,
-    paddingHorizontal: 10,
   },
-  description: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
+  description: {},
   image: {
-    flex: 1,
-    aspectRatio: 0.8,
+    height: dimensions.height * 0.6,
+    width: dimensions.width,
+  },
+  overlayBottom: {
+    width: '100%',
+    height: 200,
+    position: 'absolute',
+    bottom: 0,
   },
   descriptionInfo: {
-    flex: 2,
-    paddingLeft: 10,
+    marginTop: -50,
+    alignItems: 'center',
   },
   name: {
     color: rootColor.white,
-    fontFamily: rootFont.bold,
-    fontSize: 20,
-  },
-  genres: {
-    color: 'lightgrey',
-    fontFamily: rootFont.medium,
-  },
-  views: {
-    color: 'gray',
-    fontFamily: rootFont.medium,
+    fontFamily: rootFont.extraBold,
+    fontSize: 30,
+    height: 50,
+    textAlignVertical: 'center',
+    textTransform: 'uppercase',
   },
   actions: {
     flexDirection: 'row',
   },
-  episodesContainer: {},
+  btnAction: {
+    backgroundColor: rootColor.primary,
+    paddingVertical: 12,
+  },
+  btnActionTitle: {
+    color: rootColor.white,
+    fontFamily: rootFont.semiBold,
+    textTransform: 'uppercase',
+    fontSize: 16,
+  },
+  episodesContainer: {
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
   textDescriptionMovie: {
     color: rootColor.white,
     fontFamily: rootFont.regular,

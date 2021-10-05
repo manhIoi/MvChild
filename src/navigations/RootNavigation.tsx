@@ -1,15 +1,23 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import BottomTab from './BottomTab';
-import MovieDetailScreen from '../screens/MovieDetailScreen/MovieDetailScreen';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+import BottomTab from './BottomTab';
+import MovieDetailStack from './MovieDetailStack';
+
+const Stack = createStackNavigator();
 
 const RootNavigation = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       <Stack.Screen name="BottomTab" component={BottomTab} />
-      <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
+      <Stack.Screen name="MovieDetailStack" component={MovieDetailStack} />
     </Stack.Navigator>
   );
 };

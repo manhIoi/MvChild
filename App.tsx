@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, StatusBar, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import RootNavigation from './src/navigations/RootNavigation';
+import 'react-native-gesture-handler';
 
 const App = () => {
   LogBox.ignoreAllLogs();
