@@ -74,4 +74,5 @@ export interface SectionType {
   data?: AnimeType[];
   slug?: string;
   category?: string;
+  isShuffle?: boolean;
 }

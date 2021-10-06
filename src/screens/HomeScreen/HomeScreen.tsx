@@ -1,22 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Animated,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, ScrollView, Animated, Image} from 'react-native';
 import rootApi from '../../api/rootApi';
-import Footer from '../../components/Footer';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
-import MovieItem from '../../components/MovieItem';
 import MyHeader from '../../components/MyHeader';
 import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
 import {headerDimensions} from '../../constants/dimensions';
-import {Feather} from '../../constants/icon';
 import {SectionType, SlideType} from '../../types';
+import shuffle from '../../utils/shuffleArr';
 import styles from './styles';
 
 const sections = [
@@ -37,11 +28,13 @@ const sections = [
     title: 'Phim hay trong ngày',
     category: 'ranking',
     slug: 'ngay',
+    isShuffle: true,
   },
   {
-    title: 'Tìm kiếm nhiều nhất trong tháng',
+    title: 'Tìm kiếm nhiều trong tháng',
     category: 'ranking',
     slug: 'thang',
+    isShuffle: true,
   },
 ];
 
@@ -118,7 +111,9 @@ const HomeScreen = () => {
               <ListMovieHorizotal
                 key={`dataSection-key-${section.title}-${index}`}
                 title={section.title}
-                movies={section.data}
+                movies={
+                  section.isShuffle ? shuffle(section.data) : section.data
+                }
               />
             ))}
           </View>
