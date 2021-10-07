@@ -6,6 +6,7 @@ import {
 
 import BottomTab from './BottomTab';
 import MovieDetailStack from './MovieDetailStack';
+import {primaryTransitionSpec} from '../constants/configNavigation';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,11 @@ const RootNavigation = () => {
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        transitionSpec: {
+          open: primaryTransitionSpec,
+          close: primaryTransitionSpec,
+        },
+        animationTypeForReplace: 'pop',
       }}>
       <Stack.Screen name="BottomTab" component={BottomTab} />
       <Stack.Screen name="MovieDetailStack" component={MovieDetailStack} />

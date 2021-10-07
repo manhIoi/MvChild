@@ -1,5 +1,4 @@
-import React from 'react';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import AccountScreen from '../screens/AccountScreen/AccountScreen';

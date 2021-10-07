@@ -1,12 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeStack';
 import MyListScreen from '../screens/MyListScreen/MyListScreen';
-import TopScreen from '../screens/TopScreen/TopScreen';
 import AccountStack from './AccountStack';
-import {Feather, Entypo, FontAwesome} from '../constants/icon';
-import rootColor, {alphaColor} from '../constants/colors';
+import {Entypo, FontAwesome} from '../constants/icon';
+import rootColor from '../constants/colors';
 import {bottomTabHeight} from '../constants/dimensions';
 
 const Tab = createBottomTabNavigator();
@@ -16,28 +14,24 @@ const tabs = [
     name: 'HomeStack',
     component: HomeStack,
     label: 'Trang chủ',
-    icon: (color: string) => <Entypo name="home" color={color} size={20} />,
+    icon: (color: string, size: number) => (
+      <Entypo name="home" color={color} size={size} />
+    ),
   },
   {
     name: 'MyListScreen',
     component: MyListScreen,
     label: 'Yêu thích',
-    icon: (color: string) => <Entypo name="heart" color={color} size={20} />,
-  },
-  {
-    name: 'TopScreen',
-    component: TopScreen,
-    label: 'Bảng xếp hạng',
-    icon: (color: string) => (
-      <Entypo name="bar-graph" color={color} size={18} />
+    icon: (color: string, size: number) => (
+      <Entypo name="heart" color={color} size={size} />
     ),
   },
   {
     name: 'AccountStack',
     component: AccountStack,
     label: 'Tài khoản',
-    icon: (color: string) => (
-      <FontAwesome name="user" color={color} size={20} />
+    icon: (color: string, size: number) => (
+      <FontAwesome name="user" color={color} size={size} />
     ),
   },
 ];
@@ -65,7 +59,7 @@ const BottomTab = () => {
             component={tab.component}
             options={{
               tabBarLabel: tab.label,
-              tabBarIcon: ({focused, color}) => tab.icon(color),
+              tabBarIcon: ({focused, color}) => tab.icon(color, 20),
             }}
           />
         );

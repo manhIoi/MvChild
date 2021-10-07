@@ -11,13 +11,6 @@ const MyListScreen = () => {
     <>
       <MyHeader title="Danh sách của bạn" containerColor={rootColor.black} />
       <ScrollView style={styles.screen}>
-        {/* <View style={{flex: 1}}>
-          <MovieItemSecondary movie={mockData[0]} />
-        </View>
-
-        <View style={{flex: 1}}>
-          <MovieItemSecondary movie={mockData[0]} />
-        </View> */}
         <View style={styles.listMovie}>
           <MovieItemSecondary
             width={dimensions.width / 2}
