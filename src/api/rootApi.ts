@@ -39,10 +39,25 @@ const getInfoMoive = async (slug: string) => {
   }
 };
 
+const getSourceMoive = async (idMovie: number, episodeNumber: number) => {
+  try {
+    const request = await callApi(
+      'GET',
+      `${baseUrl}/anime/${idMovie}/episodes/${episodeNumber}`,
+    );
+    if (request.data.success) {
+      return request.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const rootApi = {
   getSlides,
   getSection,
   getInfoMoive,
+  getSourceMoive,
 };
 
 export default rootApi;

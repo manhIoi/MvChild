@@ -18,12 +18,8 @@ export interface EpisodeType {
   thumbnail_small: string;
   thumbnail_medium: string;
   upcoming: boolean | null;
-}
-
-export interface SourceType extends EpisodeType {
   videoSource: string;
 }
-
 export interface AnimeInfoType {
   id: number;
   name: string;
