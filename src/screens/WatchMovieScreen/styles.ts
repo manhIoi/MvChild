@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {statusBarHeight} from '../../constants/dimensions';
 
 const styles = StyleSheet.create({
   screen: {},
@@ -11,8 +12,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     justifyContent: 'center',
   },
+  mediaControl: {},
   toolbarStyle: {
     backgroundColor: 'red',
+  },
+  nextEpisodeBtn: {
+    position: 'absolute',
+    zIndex: 100,
+    top: statusBarHeight + 25,
+    right: 25,
   },
 });
 
