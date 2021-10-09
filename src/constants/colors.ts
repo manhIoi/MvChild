@@ -8,6 +8,7 @@ const rootColor = {
   black: '#111',
   // primary: 'rgb(64,64,64)',
   primary: 'rgb(237,40,76)',
+  gray: '#404040',
 };
 
 const alphaColor = (rgbColor: string, alpha: number) => {

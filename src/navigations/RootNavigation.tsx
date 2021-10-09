@@ -7,6 +7,7 @@ import {
 import BottomTab from './BottomTab';
 import MovieDetailStack from './MovieDetailStack';
 import {primaryTransitionSpec} from '../constants/configNavigation';
+import SearchScreen from '../screens/SearchScreen/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const RootNavigation = () => {
       }}>
       <Stack.Screen name="BottomTab" component={BottomTab} />
       <Stack.Screen name="MovieDetailStack" component={MovieDetailStack} />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

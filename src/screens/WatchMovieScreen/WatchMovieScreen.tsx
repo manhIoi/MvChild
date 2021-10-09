@@ -8,6 +8,7 @@ import ToolBar from '../../components/ToolBar';
 import styles from './styles';
 import rootApi from '../../api/rootApi';
 import PrimaryButton from '../../components/PrimaryButton';
+import Orientation from 'react-native-orientation';
 
 enum ResizeModeType {
   stretch = 'stretch',
@@ -102,9 +103,11 @@ const WatchMovieScreen = () => {
   };
   const exitFullScreen = () => {
     console.log('Exit full screen');
+    Orientation.lockToPortrait();
   };
   const enterFullScreen = () => {
     console.log('Enter full screen');
+    Orientation.unlockAllOrientations();
   };
   const onFullScreen = () => {
     if (isFullScreen) {

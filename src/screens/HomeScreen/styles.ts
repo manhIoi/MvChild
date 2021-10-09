@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import rootColor from '../../constants/colors';
+import {headerDimensions, statusBarHeight} from '../../constants/dimensions';
 
 const styles = StyleSheet.create({
   screen: {
@@ -13,14 +14,14 @@ const styles = StyleSheet.create({
   headerContainer: {
     zIndex: 1000,
     position: 'absolute',
-    top: 0,
+    paddingTop: statusBarHeight,
     left: 0,
     right: 0,
-  },
-  mockBtn: {
-    backgroundColor: 'tomato',
-    padding: 10,
-    margin: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: headerDimensions.fullHeight,
+    paddingHorizontal: 10,
   },
 });
 

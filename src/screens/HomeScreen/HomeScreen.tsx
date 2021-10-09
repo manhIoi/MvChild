@@ -1,47 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView, Animated, Image} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Animated,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import rootApi from '../../api/rootApi';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
 import MyHeader from '../../components/MyHeader';
 import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
 import {headerDimensions} from '../../constants/dimensions';
+import sections from '../../constants/sections';
 import {SectionType, SlideType} from '../../types';
 import shuffle from '../../utils/shuffleArr';
 import styles from './styles';
-
-const sections = [
-  {
-    title: 'Mới cập nhật',
-    category: 'recently',
-  },
-  {
-    title: 'Hôm nay xem gì?',
-    category: 'recommended',
-  },
-  {
-    title: 'Phổ biến nhất',
-    category: 'ranking',
-    slug: 'nam',
-  },
-  {
-    title: 'Phim hay trong ngày',
-    category: 'ranking',
-    slug: 'ngay',
-    isShuffle: true,
-  },
-  {
-    title: 'Tìm kiếm nhiều trong tháng',
-    category: 'ranking',
-    slug: 'thang',
-    isShuffle: true,
-  },
-];
 
 const HomeScreen = () => {
   // state
   const [slides, setSlides] = useState<SlideType[]>([]);
   const [dataSections, setDataSections] = useState<SectionType[]>([]);
+  const ContainerHeader = Animated.createAnimatedComponent(LinearGradient);
 
   // animated
   const scrollY = new Animated.Value(0);
@@ -80,7 +61,8 @@ const HomeScreen = () => {
 
   return (
     <>
-      <Animated.View
+      <ContainerHeader
+        colors={['#111', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0)']}
         style={[
           styles.headerContainer,
           {
@@ -88,19 +70,14 @@ const HomeScreen = () => {
             transform: [{translateY}],
           },
         ]}>
-        <MyHeader
-          leftAction={<LeftHeader />}
-          rightAction={<RightHeader />}
-          containerColor="transparent"
-        />
-      </Animated.View>
+        <LeftHeader />
+        <RightHeader />
+      </ContainerHeader>
       <ScrollView
         style={styles.screen}
         onScroll={e => {
           scrollY.setValue(Math.abs(e.nativeEvent.contentOffset.y));
         }}>
-        {/* header */}
-
         <View style={styles.container}>
           {/* slide */}
           <Slides slides={slides} />
@@ -125,7 +102,7 @@ const HomeScreen = () => {
 
 const LeftHeader = () => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         height: '100%',
         aspectRatio: 1,
@@ -136,7 +113,7 @@ const LeftHeader = () => {
         style={{width: '100%', height: '100%', borderRadius: 100}}
         source={require('../../assets/images/mockLogo.png')}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

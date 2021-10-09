@@ -72,3 +72,13 @@ export interface SectionType {
   category?: string;
   isShuffle?: boolean;
 }
+
+export interface SearchResultType {
+  id: number;
+  name: string;
+  slug: string;
+  thumbnail: string;
+  views: number;
+  is_movie: boolean;
+  time: string;
+}

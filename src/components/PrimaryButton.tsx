@@ -1,13 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from 'react-native';
 import rootColor from '../constants/colors';
 import rootFont from '../constants/fonts';
 
 interface PrimaryButtonPropsType {
   title: string;
   callback: () => void;
-  style?: object;
-  styleTitle?: object;
+  style?: ViewStyle;
+  styleTitle?: TextStyle;
 }
 
 const PrimaryButton = ({

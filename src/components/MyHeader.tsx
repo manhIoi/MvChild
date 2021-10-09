@@ -5,7 +5,7 @@ import {headerDimensions, statusBarHeight} from '../constants/dimensions';
 import rootFont from '../constants/fonts';
 
 interface MyHeaderPropsType {
-  title?: string;
+  title?: string | React.ReactNode;
   leftAction?: React.ReactNode;
   rightAction?: React.ReactNode;
   containerColor?: any;
@@ -25,7 +25,11 @@ const MyHeader = ({
         containerColor && {backgroundColor: containerColor},
       ]}>
       {leftAction}
-      <Text style={styles.title}>{title}</Text>
+      {typeof title === 'string' ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : (
+        title
+      )}
       {rightAction}
     </View>
   );
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: statusBarHeight,
     height: headerDimensions.fullHeight,
-    backgroundColor: rootColor.primary,
+    backgroundColor: rootColor.black,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
