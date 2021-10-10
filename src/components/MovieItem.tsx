@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/core';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import TouchableScale from 'react-native-touchable-scale';
 import rootColor, {alphaColor} from '../constants/colors';
 import dimensions from '../constants/dimensions';
@@ -31,9 +32,15 @@ const MovieItem = ({movie}: MovieItemPropsType) => {
           uri: movie.thumbnail,
         }}
       />
-      <View style={styles.containerDetail}>
+      <LinearGradient
+        colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.6)']}
+        style={styles.overlay}
+      />
+      <LinearGradient
+        colors={[rootColor.primary, 'rgba(255,255,255,0.2)']}
+        style={styles.containerDetail}>
         <Text style={styles.movieName}>{movie.name}</Text>
-      </View>
+      </LinearGradient>
     </TouchableScale>
   );
 };
@@ -63,5 +70,12 @@ const styles = StyleSheet.create({
   movieName: {
     fontFamily: rootFont.medium,
     color: rootColor.white,
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
 });

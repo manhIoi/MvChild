@@ -53,11 +53,26 @@ const getSourceMoive = async (idMovie: number, episodeNumber: number) => {
   }
 };
 
+const getSearchResult = async (q: string, limit: number, page: number) => {
+  try {
+    const request = await callApi(
+      'GET',
+      `${baseUrl}/search?q=${q}&limit=${limit}&page=${page}`,
+    );
+    if (request.data.success) {
+      return request.data.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const rootApi = {
   getSlides,
   getSection,
   getInfoMoive,
   getSourceMoive,
+  getSearchResult,
 };
 
 export default rootApi;

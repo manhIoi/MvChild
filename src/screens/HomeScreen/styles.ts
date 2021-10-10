@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   headerContainer: {
-    zIndex: 1000,
+    zIndex: 1000000000,
     position: 'absolute',
     paddingTop: statusBarHeight,
     left: 0,

@@ -9,6 +9,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import rootApi from '../../api/rootApi';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
+import Loadding from '../../components/Loadding';
 import MyHeader from '../../components/MyHeader';
 import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
@@ -22,6 +23,7 @@ const HomeScreen = () => {
   // state
   const [slides, setSlides] = useState<SlideType[]>([]);
   const [dataSections, setDataSections] = useState<SectionType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const ContainerHeader = Animated.createAnimatedComponent(LinearGradient);
 
   // animated
@@ -52,6 +54,7 @@ const HomeScreen = () => {
         };
       });
       setDataSections(tmp);
+      setIsLoading(false);
     });
   };
 
@@ -73,6 +76,7 @@ const HomeScreen = () => {
         <LeftHeader />
         <RightHeader />
       </ContainerHeader>
+      {isLoading && <Loadding />}
       <ScrollView
         style={styles.screen}
         onScroll={e => {
