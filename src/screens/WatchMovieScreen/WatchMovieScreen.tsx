@@ -107,7 +107,8 @@ const WatchMovieScreen = () => {
   };
   const enterFullScreen = () => {
     console.log('Enter full screen');
-    Orientation.unlockAllOrientations();
+    // Orientation.unlockAllOrientations();
+    Orientation.lockToLandscape();
   };
   const onFullScreen = () => {
     if (isFullScreen) {
