@@ -10,7 +10,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import rootApi from '../../api/rootApi';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
 import Loadding from '../../components/Loadding';
-import MyHeader from '../../components/MyHeader';
 import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
 import {headerDimensions} from '../../constants/dimensions';
