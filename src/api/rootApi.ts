@@ -1,4 +1,5 @@
 import {AxiosResponse} from 'axios';
+import {Auth} from '../firebase';
 import callApi from '../utils/callApi';
 
 const baseUrl = 'https://netime.glitch.me/api/v1';
@@ -67,12 +68,40 @@ const getSearchResult = async (q: string, limit: number, page: number) => {
   }
 };
 
+const registerUser = async (
+  fullName: string,
+  email: string,
+  password: string,
+) => {
+  try {
+    console.log(fullName, email, password);
+
+    let request = await Auth.createUserWithEmailAndPassword(email, password);
+    console.log(request);
+
+    await request.user
+      .updateProfile({
+        displayName: fullName,
+        photoURL: '',
+      })
+      .then(e => console.log(e));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const loginWithEmailAndPassword = async (email: string, password: string) => {
+  let request = await Auth.signInWithEmailAndPassword(email, password);
+  console.log(request);
+};
+
 const rootApi = {
   getSlides,
   getSection,
   getInfoMoive,
   getSourceMoive,
   getSearchResult,
+  registerUser,
+  loginWithEmailAndPassword,
 };
 
 export default rootApi;

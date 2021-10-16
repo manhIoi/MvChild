@@ -8,6 +8,7 @@ import BottomTab from './BottomTab';
 import MovieDetailStack from './MovieDetailStack';
 import {primaryTransitionSpec} from '../constants/configNavigation';
 import SearchScreen from '../screens/SearchScreen/SearchScreen';
+import AuthStack from './AuthStack';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const RootNavigation = () => {
         animationTypeForReplace: 'pop',
       }}>
       <Stack.Screen name="BottomTab" component={BottomTab} />
+      <Stack.Screen name="AuthStack" component={AuthStack} />
       <Stack.Screen name="MovieDetailStack" component={MovieDetailStack} />
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
     </Stack.Navigator>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "723532214977",
+    "project_id": "rn-movie-app-4dcad",
+    "storage_bucket": "rn-movie-app-4dcad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723532214977:android:1980be8ae7c9ae37225a40",
+        "android_client_info": {
+          "package_name": "com.mvchild"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723532214977-0mn5fjqgbf004520g9evhtgi3i9og278.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnIIDR01njsrvlV4zAQHR48w4RvbaZ5pk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723532214977-0mn5fjqgbf004520g9evhtgi3i9og278.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
