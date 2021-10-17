@@ -64,7 +64,6 @@ const RegisterScreen = () => {
           styleTitle={styles.titleLinkBtn}
         />
         <View style={styles.slice} />
-
         <GroupSocialButton
           socialButton={[
             {
