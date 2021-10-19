@@ -14,16 +14,28 @@ import Genres from '../../components/Genres';
 import {AnimeInfoType} from '../../types';
 import styles from './styles';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../redux/reducers';
+import {addToMyFavoriteAction} from '../../redux/actions/myFavoriteActions';
 
 const MovieDetailScreen = () => {
   const route = useRoute();
+  const user = useSelector((state: RootState) => state.user);
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [movieDetail, setMovieDetail] = useState<AnimeInfoType>();
+  const dispatch = useDispatch();
   const {movie} = route.params;
 
   const fecthData = async () => {
     const data = await rootApi.getInfoMoive(movie.slug);
     setMovieDetail(data);
+  };
+
+  const handleAddToMyFavorite = async () => {
+    const res = await rootApi.addToMyFavorite(user.uid, movie);
+    if (res) {
+      dispatch(addToMyFavoriteAction(movie));
+    }
   };
 
   useEffect(() => {
@@ -67,7 +79,7 @@ const MovieDetailScreen = () => {
             <View style={styles.actions}>
               <PrimaryButton
                 title="Yêu thích"
-                callback={() => console.log('add to favorite')}
+                callback={handleAddToMyFavorite}
                 style={{...styles.btnAction, marginRight: 8}}
                 styleTitle={styles.btnActionTitle}
               />

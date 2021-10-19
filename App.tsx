@@ -7,6 +7,7 @@ import Orientation from 'react-native-orientation';
 
 const App = () => {
   LogBox.ignoreAllLogs();
+
   useEffect(() => {
     Orientation.lockToPortrait();
   }, []);

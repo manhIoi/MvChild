@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import rootApi from '../../api/rootApi';
+import Avatar from '../../components/Avatar';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
 import Loadding from '../../components/Loadding';
 import SearchBtn from '../../components/SearchBtn';
@@ -121,7 +122,17 @@ const LeftHeader = () => {
 };
 
 const RightHeader = () => {
-  return <SearchBtn />;
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <SearchBtn />
+      <Avatar name="Loi" size={40} rounded />
+    </View>
+  );
 };
 
 export default HomeScreen;

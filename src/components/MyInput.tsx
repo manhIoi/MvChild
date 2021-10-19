@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: rootColor.white,
     fontFamily: rootFont.regular,
+    flex:1,
   },
 });

@@ -1,5 +1,6 @@
 import {AxiosResponse} from 'axios';
-import {Auth} from '../firebase';
+import {Auth, FireStore} from '../firebase';
+import {AnimeType} from '../types';
 import callApi from '../utils/callApi';
 
 const baseUrl = 'https://netime.glitch.me/api/v1';
@@ -91,7 +92,40 @@ const registerUser = async (
 };
 const loginWithEmailAndPassword = async (email: string, password: string) => {
   let request = await Auth.signInWithEmailAndPassword(email, password);
-  console.log(request);
+  const token = await request.user.getIdToken();
+  console.log(request, token);
+};
+
+const getMyFavorite = async (idUser: string) => {
+  try {
+    const request = await FireStore.collection('Favorites')
+      .doc(idUser)
+      .collection('movies')
+      .orderBy('createdAt', 'asc')
+      .get();
+    if (request) {
+      return request.docs.map(doc => doc.data().movie);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const addToMyFavorite = async (idUser: string, movie: AnimeType) => {
+  try {
+    const request = await FireStore.collection('Favorites')
+      .doc(idUser)
+      .collection('movies')
+      .add({movie: movie, createdAt: Date.now()});
+    if (request) {
+      console.log('add success');
+      return true;
+    }
+  } catch (error) {
+    console.log(error);
+    console.log('add fail');
+    return false;
+  }
 };
 
 const rootApi = {
@@ -102,6 +136,8 @@ const rootApi = {
   getSearchResult,
   registerUser,
   loginWithEmailAndPassword,
+  getMyFavorite,
+  addToMyFavorite,
 };
 
 export default rootApi;

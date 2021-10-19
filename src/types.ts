@@ -82,3 +82,17 @@ export interface SearchResultType {
   is_movie: boolean;
   time: string;
 }
+
+export interface UserInfoType {
+  displayName?: string | null;
+  email?: string | null;
+  phoneNumber?: string | null;
+  photoURL?: string | null;
+  providerId: string | null;
+  uid: string;
+}
+
+export interface ActionType {
+  type: string;
+  payload?: any | never;
+}
