@@ -17,7 +17,7 @@ const addToMyFavoriteAction = (movie: AnimeType) => {
 
 const removeToMyFavoriteAction = (movie: AnimeType) => {
   return {
-    type: myFavoriteAction.ADD_MOVIE,
+    type: myFavoriteAction.REMOVE_MOVIE,
     payload: movie,
   };
 };

@@ -4,6 +4,8 @@ import rootColor from '../constants/colors';
 import rootFont from '../constants/fonts';
 import {AnimeType} from '../types';
 import Ripple from 'react-native-material-ripple';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {useNavigation} from '@react-navigation/core';
 
 interface MovieItemSecondaryPropsType {
   movie: AnimeType;
@@ -11,6 +13,14 @@ interface MovieItemSecondaryPropsType {
 }
 
 const MovieItemSecondary = ({movie, width}: MovieItemSecondaryPropsType) => {
+  const navigation = useNavigation<BottomTabNavigationProp<any>>();
+
+  const handlePress = () => {
+    navigation.navigate('MovieDetailStack', {
+      screen: 'MovieDetailScreen',
+      params: {movie},
+    });
+  };
   return (
     <View style={[styles.container, {width}]}>
       <Image
@@ -21,6 +31,7 @@ const MovieItemSecondary = ({movie, width}: MovieItemSecondaryPropsType) => {
       />
       <View style={styles.overlay} />
       <Ripple
+        onPress={handlePress}
         rippleOpacity={0.5}
         rippleDuration={2000}
         rippleColor={rootColor.primary}

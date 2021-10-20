@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch, useSelector} from 'react-redux';
 import rootApi from '../../api/rootApi';
 import Avatar from '../../components/Avatar';
 import ListMovieHorizotal from '../../components/ListMovieHorizotal';
@@ -15,6 +16,8 @@ import SearchBtn from '../../components/SearchBtn';
 import Slides from '../../components/Slides';
 import {headerDimensions} from '../../constants/dimensions';
 import sections from '../../constants/sections';
+import {getMyFavorite} from '../../redux/actions/myFavoriteActions';
+import {RootState} from '../../redux/reducers';
 import {SectionType, SlideType} from '../../types';
 import shuffle from '../../utils/shuffleArr';
 import styles from './styles';
@@ -25,6 +28,8 @@ const HomeScreen = () => {
   const [dataSections, setDataSections] = useState<SectionType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const ContainerHeader = Animated.createAnimatedComponent(LinearGradient);
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   // animated
   const scrollY = new Animated.Value(0);
@@ -41,6 +46,11 @@ const HomeScreen = () => {
   const fetchData = async () => {
     const SLIDES_DATA = await rootApi.getSlides();
     setSlides(SLIDES_DATA);
+
+    if (user) {
+      const res: any = await rootApi.getMyFavorite(user.uid);
+      dispatch(getMyFavorite(res));
+    }
 
     const DATA_SECTIONS = await sections.map(async section => {
       return await rootApi.getSection(section.category, section.slug);

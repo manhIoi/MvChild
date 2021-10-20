@@ -116,14 +116,28 @@ const addToMyFavorite = async (idUser: string, movie: AnimeType) => {
     const request = await FireStore.collection('Favorites')
       .doc(idUser)
       .collection('movies')
-      .add({movie: movie, createdAt: Date.now()});
-    if (request) {
-      console.log('add success');
-      return true;
-    }
+      .doc(movie.slug)
+      .set({movie: movie, createdAt: Date.now()});
+    console.log('add success');
+    return true;
   } catch (error) {
     console.log(error);
     console.log('add fail');
+    return false;
+  }
+};
+
+const removeFromMyFavorite = async (idUser: string, movie: AnimeType) => {
+  try {
+    const request = await FireStore.collection('Favorites')
+      .doc(idUser)
+      .collection('movies')
+      .doc(movie.slug)
+      .delete();
+    console.log('remove successs');
+    return true;
+  } catch (error) {
+    console.log('Remove fail');
     return false;
   }
 };
@@ -138,6 +152,7 @@ const rootApi = {
   loginWithEmailAndPassword,
   getMyFavorite,
   addToMyFavorite,
+  removeFromMyFavorite,
 };
 
 export default rootApi;

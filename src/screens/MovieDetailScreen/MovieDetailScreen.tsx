@@ -11,20 +11,33 @@ import PrimaryButton from '../../components/PrimaryButton';
 import SearchBtn from '../../components/SearchBtn';
 import ViewsText from '../../components/ViewsText';
 import Genres from '../../components/Genres';
-import {AnimeInfoType} from '../../types';
+import {AnimeInfoType, AnimeType} from '../../types';
 import styles from './styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/reducers';
-import {addToMyFavoriteAction} from '../../redux/actions/myFavoriteActions';
+import {
+  addToMyFavoriteAction,
+  removeToMyFavoriteAction,
+} from '../../redux/actions/myFavoriteActions';
 
 const MovieDetailScreen = () => {
   const route = useRoute();
   const user = useSelector((state: RootState) => state.user);
+  const myFavorite = useSelector((state: RootState) => state.myFavorite);
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigation = useNavigation<StackNavigationProp<any>>();
   const [movieDetail, setMovieDetail] = useState<AnimeInfoType>();
   const dispatch = useDispatch();
   const {movie} = route.params;
+
+  const isMovieInMyFavorite = () => {
+    const index = myFavorite.findIndex(
+      (item: AnimeType) => item.slug === movie.slug,
+    );
+    if (index != -1) return true;
+    return false;
+  };
 
   const fecthData = async () => {
     const data = await rootApi.getInfoMoive(movie.slug);
@@ -32,14 +45,27 @@ const MovieDetailScreen = () => {
   };
 
   const handleAddToMyFavorite = async () => {
-    const res = await rootApi.addToMyFavorite(user.uid, movie);
-    if (res) {
-      dispatch(addToMyFavoriteAction(movie));
+    if (!isFavorite) {
+      const res = await rootApi.addToMyFavorite(user.uid, movie);
+      if (res) {
+        dispatch(addToMyFavoriteAction(movie));
+      }
+    } else {
+      if (isMovieInMyFavorite()) {
+        const res = await rootApi.removeFromMyFavorite(user.uid, movie);
+        if (res) {
+          dispatch(removeToMyFavoriteAction(movie));
+        }
+      }
     }
+    setIsFavorite(!isFavorite);
   };
 
   useEffect(() => {
     fecthData();
+    if (isMovieInMyFavorite()) {
+      setIsFavorite(true);
+    }
   }, []);
 
   const moveWatchScreen = (episodeNumber: number) => {
@@ -78,7 +104,7 @@ const MovieDetailScreen = () => {
             <ViewsText views={movieDetail?.views} />
             <View style={styles.actions}>
               <PrimaryButton
-                title="Yêu thích"
+                title={`${isFavorite ? 'Hủy yêu thích' : 'Yêu thích'}`}
                 callback={handleAddToMyFavorite}
                 style={{...styles.btnAction, marginRight: 8}}
                 styleTitle={styles.btnActionTitle}
