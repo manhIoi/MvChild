@@ -14,7 +14,10 @@ const LoginScreen = () => {
   const navigation = useNavigation<StackNavigationProp<any>>();
 
   const loginHandler = async () => {
-    const res = rootApi.loginWithEmailAndPassword(email, password);
+    const res = await rootApi.loginWithEmailAndPassword(email, password);
+    if (res) {
+      navigation.goBack();
+    }
   };
   const registerHandler = () => {
     navigation.navigate('RegisterScreen');

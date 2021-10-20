@@ -17,8 +17,8 @@ const SplashScreen = () => {
     const unregisterAuthObservable = Auth.onAuthStateChanged(async user => {
       console.log('call authSateChange');
       if (!user) {
-        console.log('user log out');
-        return dispatch(logoutAction);
+        console.log('user is null');
+        return;
       }
       const userData: UserInfoType = {
         uid: user.uid,

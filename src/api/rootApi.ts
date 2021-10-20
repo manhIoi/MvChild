@@ -91,9 +91,25 @@ const registerUser = async (
   }
 };
 const loginWithEmailAndPassword = async (email: string, password: string) => {
-  let request = await Auth.signInWithEmailAndPassword(email, password);
-  const token = await request.user.getIdToken();
-  console.log(request, token);
+  try {
+    let request = await Auth.signInWithEmailAndPassword(email, password);
+    const token = await request.user.getIdToken();
+    console.log(request, token);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+const logoutUser = async () => {
+  try {
+    const request = await Auth.signOut();
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 const getMyFavorite = async (idUser: string) => {
@@ -153,6 +169,7 @@ const rootApi = {
   getMyFavorite,
   addToMyFavorite,
   removeFromMyFavorite,
+  logoutUser,
 };
 
 export default rootApi;
