@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MvChild</string>
+    <string name="facebook_app_id">591101572207409</string>
+    <string name="fb_login_protocol_scheme">fb591101572207409</string>
 </resources>

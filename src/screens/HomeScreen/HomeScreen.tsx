@@ -132,6 +132,7 @@ const LeftHeader = () => {
 };
 
 const RightHeader = () => {
+  const user = useSelector((state: RootState) => state.user);
   return (
     <View
       style={{
@@ -140,7 +141,7 @@ const RightHeader = () => {
         justifyContent: 'center',
       }}>
       <SearchBtn />
-      <Avatar name="Loi" size={40} rounded />
+      {user && <Avatar name="Loi" size={40} rounded />}
     </View>
   );
 };

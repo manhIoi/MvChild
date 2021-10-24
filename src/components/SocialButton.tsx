@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 interface SocialButtonPropsType {
   socialButton: any;
@@ -7,14 +8,14 @@ interface SocialButtonPropsType {
 
 const SocialButton = ({socialButton}: SocialButtonPropsType) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={socialButton.callback} style={styles.container}>
       <Image
         source={{
           uri: socialButton.uri,
         }}
         style={{...StyleSheet.absoluteFillObject, ...styles.image}}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

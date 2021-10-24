@@ -1,7 +1,11 @@
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {AxiosResponse} from 'axios';
+import auth from '@react-native-firebase/auth';
 import {Auth, FireStore} from '../firebase';
 import {AnimeType} from '../types';
 import callApi from '../utils/callApi';
+import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const baseUrl = 'https://netime.glitch.me/api/v1';
 
@@ -101,6 +105,48 @@ const loginWithEmailAndPassword = async (email: string, password: string) => {
     return false;
   }
 };
+const loginWithFacebook = async () => {
+  try {
+    const result = await LoginManager.logInWithPermissions([
+      'public_profile',
+      'email',
+    ]);
+
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+
+    // Once signed in, get the users AccesToken
+    const data = await AccessToken.getCurrentAccessToken();
+
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential = auth.FacebookAuthProvider.credential(
+      data.accessToken,
+    );
+    const request = await Auth.signInWithCredential(facebookCredential);
+    console.log(request);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const loginWithGoogle = async () => {
+  try {
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    return Auth.signInWithCredential(googleCredential);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const logoutUser = async () => {
   try {
@@ -170,6 +216,8 @@ const rootApi = {
   addToMyFavorite,
   removeFromMyFavorite,
   logoutUser,
+  loginWithFacebook,
+  loginWithGoogle,
 };
 
 export default rootApi;

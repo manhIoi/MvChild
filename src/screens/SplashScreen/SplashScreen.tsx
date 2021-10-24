@@ -29,6 +29,9 @@ const SplashScreen = () => {
         providerId: user.providerId,
       };
       dispatch(loginAction(userData));
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      }
     });
 
     setTimeout(() => {

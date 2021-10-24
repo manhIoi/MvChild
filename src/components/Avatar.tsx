@@ -10,7 +10,6 @@ interface AvatarPropsType {
   size: number;
   rounded?: boolean;
 }
-
 const Avatar = ({image, name, rounded, size}: AvatarPropsType) => {
   return (
     <View
