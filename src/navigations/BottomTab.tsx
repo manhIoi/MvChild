@@ -73,28 +73,12 @@ const BottomTab = () => {
 
 Animatable.initializeRegistryWithDefinitions({
   iconIn: {
-    0: {transform: [{translateY: 0}]},
-    0.9: {transform: [{translateY: (-bottomTabHeight * 1.2) / 2}]},
-    1: {transform: [{translateY: -bottomTabHeight / 2}]},
+    0: {transform: [{scale: 1}]},
+    1: {transform: [{scale: 1.3}]},
   },
   iconOut: {
-    0: {transform: [{translateY: -bottomTabHeight / 2}]},
-    1: {transform: [{translateY: 0}]},
-  },
-  circleIn: {
-    0: {transform: [{scale: 0}]},
-    0.3: {transform: [{scale: 0.5}]},
-    0.5: {transform: [{scale: 0.4}]},
-    0.8: {transform: [{scale: 0.7}]},
+    0: {transform: [{scale: 1.3}]},
     1: {transform: [{scale: 1}]},
-  },
-  myScaleIn: {
-    0: {transform: [{scale: 0}]},
-    1: {transform: [{scale: 1}]},
-  },
-  myScaleOut: {
-    0: {transform: [{scale: 1}]},
-    1: {transform: [{scale: 0}]},
   },
 });
 
@@ -102,18 +86,12 @@ const TabBarButton = (props: any) => {
   const {tab, onPress, accessibilityState} = props;
   const focused = accessibilityState.selected;
   const iconRef = useRef<any>(null);
-  const circleRef = useRef<any>(null);
-  const labelRef = useRef<any>(null);
 
   useEffect(() => {
     if (focused) {
       iconRef.current.animate('iconIn');
-      circleRef.current.animate('circleIn');
-      labelRef.current.animate('myScaleIn');
     } else {
       iconRef.current.animate('iconOut');
-      circleRef.current.animate('myScaleOut');
-      labelRef.current.animate('myScaleOut');
     }
   }, [focused]);
 
@@ -125,26 +103,10 @@ const TabBarButton = (props: any) => {
       <Animatable.View
         style={styles.tabBarContainer}
         ref={iconRef}
-        duration={500}>
+        duration={800}>
         <View style={styles.tabBarButton}>
-          <Animatable.View
-            ref={circleRef}
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              backgroundColor: rootColor.primary,
-              borderRadius: 50,
-              borderWidth: 4,
-              borderColor: rootColor.black,
-            }}
-          />
-          {tab.icon(
-            focused ? rootColor.black : alphaColor(rootColor.primary, 0.8),
-            20,
-          )}
+          {tab.icon(focused ? rootColor.primary : rootColor.gray, 20)}
         </View>
-        <Animatable.Text ref={labelRef} style={styles.label}>
-          {tab.label}
-        </Animatable.Text>
       </Animatable.View>
     </TouchableOpacity>
   );
@@ -162,11 +124,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-  },
-  label: {
-    fontSize: 14,
-    fontFamily: rootFont.medium,
-    color: rootColor.primary,
   },
 });
 

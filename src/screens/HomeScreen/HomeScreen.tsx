@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/core';
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -5,6 +7,7 @@ import {
   Animated,
   Image,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
@@ -44,6 +47,10 @@ const HomeScreen = () => {
   });
 
   const fetchData = async () => {
+    let moviesWatchedString: any;
+    if (user) {
+      moviesWatchedString = await AsyncStorage.getItem(user.uid);
+    }
     const SLIDES_DATA = await rootApi.getSlides();
     setSlides(SLIDES_DATA);
 
@@ -57,12 +64,22 @@ const HomeScreen = () => {
     });
 
     await Promise.all(DATA_SECTIONS).then(value => {
-      const tmp = value.map((data, index) => {
+      let tmp = value.map((data, index) => {
         return {
           ...sections[index],
           data,
         };
       });
+      if (user && moviesWatchedString) {
+        tmp = [
+          {
+            title: 'Truy cập gần đây',
+            category: '',
+            data: JSON.parse(moviesWatchedString),
+          },
+          ...tmp,
+        ];
+      }
       setDataSections(tmp);
       setIsLoading(false);
     });
@@ -124,8 +141,13 @@ const LeftHeader = () => {
         overflow: 'hidden',
       }}>
       <Image
-        style={{width: '100%', height: '100%', borderRadius: 100}}
-        source={require('../../assets/images/mockLogo.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+          borderRadius: 100,
+          backgroundColor: '#111',
+        }}
+        source={require('../../assets/images/mock3Logo.png')}
       />
     </TouchableOpacity>
   );
@@ -133,6 +155,7 @@ const LeftHeader = () => {
 
 const RightHeader = () => {
   const user = useSelector((state: RootState) => state.user);
+  const navigation = useNavigation<StackNavigationProp<any>>();
   return (
     <View
       style={{
@@ -141,7 +164,15 @@ const RightHeader = () => {
         justifyContent: 'center',
       }}>
       <SearchBtn />
-      {user && <Avatar name="Loi" size={40} rounded />}
+      {user && (
+        <Avatar
+          callback={() => navigation.navigate('AccountStack')}
+          name={user.displayName}
+          image={user.photoURL}
+          size={40}
+          rounded
+        />
+      )}
     </View>
   );
 };

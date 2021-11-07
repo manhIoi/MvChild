@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Image} from 'react-native-animatable';
 import rootColor from '../constants/colors';
 import rootFont from '../constants/fonts';
@@ -9,10 +9,12 @@ interface AvatarPropsType {
   name: string;
   size: number;
   rounded?: boolean;
+  callback?: () => void;
 }
-const Avatar = ({image, name, rounded, size}: AvatarPropsType) => {
+const Avatar = ({image, name, rounded, size, callback}: AvatarPropsType) => {
   return (
-    <View
+    <Pressable
+      onPress={callback}
       style={[
         styles.container,
         {
@@ -28,7 +30,7 @@ const Avatar = ({image, name, rounded, size}: AvatarPropsType) => {
           {name[0]}
         </Text>
       )}
-    </View>
+    </Pressable>
   );
 };
 

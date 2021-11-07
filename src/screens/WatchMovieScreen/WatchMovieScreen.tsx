@@ -35,9 +35,6 @@ const WatchMovieScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [paused, setPaused] = useState(false);
   const [showNextEpisode, setShowNextEpisodeBtn] = useState(false);
-  const [screenType, setScreenType] = useState<ResizeModeType>(
-    ResizeModeType.contain,
-  );
   const [playerState, setPlayerState] = useState(PLAYER_STATES.PLAYING);
 
   const fetchData = async (
@@ -79,7 +76,6 @@ const WatchMovieScreen = () => {
     console.log(data.currentTime / data.seekableDuration);
     if (data.currentTime / data.seekableDuration > 0.98) {
       setShowNextEpisodeBtn(true);
-      // getNextEpisode();
     } else {
       setShowNextEpisodeBtn(false);
     }

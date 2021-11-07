@@ -7,6 +7,13 @@ const styles = StyleSheet.create({
     marginTop: headerDimensions.fullHeight,
     backgroundColor: rootColor.black,
   },
+  screenCenter: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: rootColor.black,
+    marginTop: headerDimensions.fullHeight,
+    flex: 1,
+  },
   listMovie: {
     flexWrap: 'wrap',
     flexDirection: 'row',
