@@ -72,8 +72,6 @@ const WatchMovieScreen = () => {
     // setPaused(false);
   };
   const onProgress = (data: OnProgressData) => {
-    console.log('progress', data);
-    console.log(data.currentTime / data.seekableDuration);
     if (data.currentTime / data.seekableDuration > 0.98) {
       setShowNextEpisodeBtn(true);
     } else {
