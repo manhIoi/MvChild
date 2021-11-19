@@ -180,11 +180,9 @@ const addToMyFavorite = async (idUser: string, movie: AnimeType) => {
       .collection('movies')
       .doc(movie.slug)
       .set({movie: movie, createdAt: Date.now()});
-    console.log('add success');
     return true;
   } catch (error) {
     console.log(error);
-    console.log('add fail');
     return false;
   }
 };
@@ -196,10 +194,8 @@ const removeFromMyFavorite = async (idUser: string, movie: AnimeType) => {
       .collection('movies')
       .doc(movie.slug)
       .delete();
-    console.log('remove successs');
     return true;
   } catch (error) {
-    console.log('Remove fail');
     return false;
   }
 };
