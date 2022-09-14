@@ -52,7 +52,7 @@ const HomeScreen = () => {
       moviesWatchedString = await AsyncStorage.getItem(user.uid);
     }
     const SLIDES_DATA = await rootApi.getSlides();
-    setSlides(SLIDES_DATA);
+    setSlides(SLIDES_DATA || []);
 
     if (user) {
       const res: any = await rootApi.getMyFavorite(user.uid);

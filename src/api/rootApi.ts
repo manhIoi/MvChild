@@ -12,6 +12,7 @@ const baseUrl = 'https://netime.glitch.me/api/v1';
 const getSlides = async () => {
   try {
     const request = await callApi('GET', `${baseUrl}/slide`);
+    console.info('🚀 => request', request);
     if (request.data.success) {
       return request.data.data;
     }
