@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "all": "watchman watch-del-all && rm -rf yarn.lock && rm -rf node_modules/ && yarn install && cd ios && rm -rf Pods && rm -rf Podfile.lock && arch -x86_64 pod install --repo-update && cd .."
   },
   "dependencies": {
     "@react-native-firebase/app": "^12.9.1",
